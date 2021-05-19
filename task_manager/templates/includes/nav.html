@@ -1,0 +1,57 @@
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="{% url 'tasks:index' %}"><span style="color:red">Бристоль</span></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        {% if user.is_authenticated %}
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Персональные задачи
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+              <li><a class="dropdown-item" href="{% url 'tasks:inspections' %}">Проверки</a></li>
+              <li><a class="dropdown-item" href="#">Претензии</a></li>
+              <li><a class="dropdown-item" href="#">Суды</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Сводная информация
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+              <li><a class="dropdown-item" href="#">Проверки</a></li>
+              <li><a class="dropdown-item" href="#">Претензии</a></li>
+              <li><a class="dropdown-item" href="#">Суды</a></li>
+            </ul>
+          </li>
+        </ul>
+        {% endif %}
+        
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 top-menu">
+          {% if user.is_authenticated %}
+          <span class="navbar-text text-dark">
+            Пользователь:
+          </span>
+          <li class="nav-item">
+            <a class="nav-link active" href="#">{{ user.username }}</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Изменить пароль</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Выйти</a>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="#">Войти</a>
+          </li>
+          {% endif %}
+        </ul>
+        
+      </div>
+    </div>
+  </nav>
