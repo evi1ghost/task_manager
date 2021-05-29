@@ -52,5 +52,13 @@ def edit_inspection(request, insp_id):
         return redirect('tasks:inspections')
     return render(
         request, 'new_task.html',
-        {'form': form, 'insp_id': inspection.id,'is_new': False}
+        {'form': form, 'insp_id': inspection.id, 'is_new': False}
     )
+
+
+@login_required
+def del_inspection(request, insp_id):
+    inspection = get_object_or_404(Inspection, id=insp_id)
+    if inspection.user == request.user:
+        inspection.delete()
+    return redirect('tasks:inspections')

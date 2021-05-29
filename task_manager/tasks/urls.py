@@ -17,5 +17,9 @@ urlpatterns = [
     path(
         'edit_inspection/<int:insp_id>/',
         views.edit_inspection, name='edit_inspection'
-    )
+    ),
+    path(
+        'del_inspection/<int:insp_id>',
+        views.del_inspection, name='del_inspection'
+    ),
 ]
