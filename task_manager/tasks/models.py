@@ -1,32 +1,8 @@
 from django.db import models
 from django.contrib.auth import get_user_model
-from django.contrib.auth.models import User
-
-
-def get_last_name(self):
-    return self.last_name
-
-
-User.add_to_class("__str__", get_last_name)
 
 
 User = get_user_model()
-
-
-INSPECTION_TYPE = [
-    ('RPN', 'Роспотребнадзор'),
-    ('POLICE', 'Полиция'),
-    ('PROSECUTOR', 'Прокуратура'),
-    ('LABORE', 'ГИТ'),
-    ('ATI', 'Ати/Администрация'),
-    ('OTHERS', 'Иные контролирующие органы')
-]
-
-
-CLAIMS_TYPE = [
-    ('COUNTERPARTY', 'В адрес контрагента'),
-    ('SELF', 'В адрес Компании')
-]
 
 
 class Region(models.Model):
@@ -71,7 +47,7 @@ class Inspection(models.Model):
         verbose_name='Собития в рамках проверки', blank=True
     )
     result = models.CharField(
-        verbose_name='Результат', default='В работе', max_length=200
+        verbose_name='Результат/статус', default='В работе', max_length=200
     )
 
     def __str__(self):
