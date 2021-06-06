@@ -40,6 +40,7 @@ ALLOWED_HOSTS = [
 INSTALLED_APPS = [
     'tasks',
     'user',
+    'django_filters',
     'django_tables2',
     'django.contrib.admin',
     'django.contrib.auth',

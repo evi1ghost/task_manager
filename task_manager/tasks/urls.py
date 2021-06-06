@@ -10,16 +10,22 @@ app_name = 'tasks'
 urlpatterns = [
     path('', views.index, name='index'),
     path(
-        'inspections/', login_required(views.InspectionListView.as_view()),
+        'inspections/',
+        login_required(views.PersonalInspectionListView.as_view()),
         name='inspections'
     ),
-    path('new_inspection/', views.new_inspection, name='new_inspection'),
+    path('inspection/new/', views.new_inspection, name='new_inspection'),
     path(
-        'edit_inspection/<int:insp_id>/',
+        'inspections/<int:insp_id>/edit/',
         views.edit_inspection, name='edit_inspection'
     ),
     path(
-        'del_inspection/<int:insp_id>',
+        'inspection/<int:insp_id>/delete',
         views.del_inspection, name='del_inspection'
     ),
+    path(
+        'inspections/all/',
+        login_required(views.AllInspectionListView.as_view()),
+        name='all_inspections'
+    )
 ]

@@ -1,13 +1,39 @@
 {% extends "base.html" %} 
 {% block title %} Последние обновления {% endblock %}
-
+{% block header %}Проверки контролирующих органов{% endblock %}
 {% block content %}
+{% load user_filters %}
 {% load render_table from django_tables2 %}
 <div class="container-fluid">
 
     <!-- {% include "includes/menu.html" with index=True %} -->
 
-    <h1>Проверки контролирующих органов</h1>
+    {% if filter %}
+        <div class="btn-group btn-group-sm" role="group">
+            <button class="btn btn-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#filterForm" aria-expanded="false" aria-controls="filterForm">Фильтры</button>
+        </div>
+        <div class="collapse" id="filterForm">
+            <form method="get" class="px-4 py-3">
+                <div class="row">
+                {% for field in filter.form %}
+                    {% if field.errors %}
+                        <div class="alert alert-danger" role="alert">>
+                            {{ field.errors }}
+                    </div>
+                    {% endif %}
+                    <label class="col-md-1 col-form-label text-end">{{ field.label_tag }}</label>
+                    <div class="col-md-2 mt-1">
+                        {{ field|addclass:"form-control form-control-sm" }}
+                    </div>
+                {% endfor %}
+                </div>
+                <div class="btn-group btn-group-sm" role="group">
+                    <button type="submit" class="btn btn-secondary">Применить</button>
+                </div>
+            </form>
+        </div>
+
+    {% endif %}
     {% render_table table %}
 </div>          
 
