@@ -1,4 +1,11 @@
-{% if user.is_authenticated %} 
+<div class="btn-group btn-group-sm" role="group">
+    <a class="btn btn-secondary me-1" href="{% url 'tasks:new_inspection' %}">Добавить запись</a>
+    {% if filter %}
+    <!-- include "includes/filter.html" for correct work of filters -->
+    <button class="btn btn-secondary me-1" type="button" data-bs-toggle="collapse" data-bs-target="#filterForm" aria-expanded="false" aria-controls="filterForm">Фильтры</button>
+    {% endif %}
+</div>
+<!-- {% if user.is_authenticated %} 
 <div class="row">
     <ul class="nav nav-tabs">
         <li class="nav-item">
@@ -13,4 +20,4 @@
         </li>
     </ul>
 </div>
-{% endif %} 
+{% endif %}  -->

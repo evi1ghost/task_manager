@@ -3,9 +3,9 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
 
 from django_filters.views import FilterView
-from django_tables2 import SingleTableMixin, SingleTableView
+from django_tables2 import SingleTableMixin
 
-from .filters import InspectionFilter
+from .filters import InspectionFilter, PersonalInspectionFilter
 from .forms import InspectionForm
 from .models import Inspection
 from .tables import InspectionTable
@@ -19,22 +19,19 @@ def index(request):
     return render(request, 'index.html', {})
 
 
-class PersonalInspectionListView(SingleTableView):
-    model = Inspection
-    table_class = InspectionTable
-    template_name = 'inspections.html'
-    paginate_by = PAGINATE_BY
-
-    def get_table_data(self):
-        return Inspection.objects.filter(user=self.request.user)
-
-
 class AllInspectionListView(SingleTableMixin, FilterView):
     model = Inspection
     table_class = InspectionTable
     template_name = 'inspections.html'
     paginate_by = PAGINATE_BY
     filterset_class = InspectionFilter
+
+
+class PersonalInspectionListView(AllInspectionListView):
+    filterset_class = PersonalInspectionFilter
+
+    def get_queryset(self):
+        return Inspection.objects.filter(user=self.request.user)
 
 
 @login_required

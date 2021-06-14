@@ -1,5 +1,3 @@
-from django.forms import widgets
-from django.db import models
 from django.contrib.auth import get_user_model
 
 import django_filters
@@ -43,3 +41,9 @@ class InspectionFilter(django_filters.FilterSet):
     class Meta:
         model = Inspection
         exclude = ['id', ]
+
+
+class PersonalInspectionFilter(InspectionFilter):
+    class Meta:
+        model = Inspection
+        exclude = ['id', 'user']
