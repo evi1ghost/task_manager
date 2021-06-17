@@ -44,6 +44,15 @@ class InspectionFilter(django_filters.FilterSet):
 
 
 class PersonalInspectionFilter(InspectionFilter):
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.get('request')
+        super().__init__(*args, **kwargs)
+        self.filters['user'].queryset = User.objects.filter(
+            id=self.request.user.id
+        )
+
+    user = django_filters.ModelChoiceFilter(queryset=None)
+
     class Meta:
         model = Inspection
-        exclude = ['id', 'user']
+        exclude = ['id', ]
