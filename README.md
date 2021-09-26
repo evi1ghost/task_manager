@@ -44,6 +44,11 @@ python manage.py createsuperuser
 ```
 После создания супепользователя можно использовать данные учетной записи для страницы администрирования - http://127.0.0.1:8000/admin/
 
+### Собрать статику:
+```sh
+python manage.py collectstatic
+```
+
 ### Запустить проект:
 ```sh
 python manage.py runserver
